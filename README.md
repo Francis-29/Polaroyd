@@ -1,2 +1,2 @@
-# Social-Media-Website
-This is a social media website created using Django framework. This is based from a tutorial.
+# Polaroyd
+Polaroyd is a photo sharing website. This is created using Django.
