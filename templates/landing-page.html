@@ -14,8 +14,8 @@
         <div class="flex items-center justify-between">
             <img src="{% static 'images/mylogo.png' %}" alt="logo" class="w-28">
             <div class="flex items-center justify-end space-x-6">
-                <a href="#" class="text-myWhite px-4 py-1 border-2 border-myTeal rounded-full transition-all duration-300 ease-out hover:bg-myTeal">Log In</a>
-                <a href="#" class="text-myWhite px-4 py-1 border-2 border-myTeal rounded-full transition-all duration-300 ease-out hover:bg-myTeal">Sign Up</a>
+                <a href="{% url 'login' %}" class="text-myWhite px-4 py-1 border-2 border-myTeal rounded-full transition-all duration-300 ease-out hover:bg-myTeal">Log In</a>
+                <a href="{% url 'signup' %}" class="text-myWhite px-4 py-1 border-2 border-myTeal rounded-full transition-all duration-300 ease-out hover:bg-myTeal">Sign Up</a>
             </div>
         </div>
         
