@@ -31,7 +31,6 @@ def signup_view(request):
     if request.user.is_authenticated:
         return redirect('home')
 
-    form = UserCreationForm()
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -42,7 +41,7 @@ def signup_view(request):
             login(request, user)
             return redirect('home')
 
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'login.html')
 
 
 def logout_view(request):

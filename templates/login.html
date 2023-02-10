@@ -43,6 +43,7 @@
                 <div class="p-2">
                     <form action="" method="POST">
                         {% csrf_token %}
+                        {{ form.as_p }}
                         <div class="mb-4">
                             <p class="mb-1 font-medium">Username</p>
                             <input type="text" name="username" placeholder="Type your username" class="p-2 w-full bg-myWhite rounded-sm text-myBlack">
