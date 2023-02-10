@@ -3,8 +3,8 @@
   <div class="w-fit mx-auto flex space-x-4 items-center mb-8 text-myWhite py-4 px-8 rounded-lg">
       <a href="#"><img src="{% static 'images/avatar.png' %}" alt="Avatar" class="avatar w-12 rounded-full "></a>
       <div>
-          <a href="#"><h3 class="text-s font-medium">Francis</h3></a>
-          <p class="text-xs">@francisuser</p>
+          <a href="#"><h3 class="text-s font-medium">{{ request.user }}</h3></a>
+          <p class="text-xs">@{{ request.user }}</p>
       </div>
       <a href="#">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

@@ -7,7 +7,7 @@ class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=64)
     bio = models.CharField(max_length=255, blank=True)
-    profile_picture = models.ImageField(upload_to='profile_pics', default='avatar.png')
+    profile_picture = models.ImageField(upload_to='profile_pics', default='profile_pics/avatar.png')
     banner = models.ImageField(null=True, blank=True, upload_to='banners')
     followers_count = models.PositiveIntegerField(default=0)
     following_count = models.PositiveIntegerField(default=0)
