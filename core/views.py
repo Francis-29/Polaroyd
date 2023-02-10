@@ -4,6 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 
+
 # Create your views here.
 def landing_page(request):
     return render(request, 'landing-page.html')
@@ -35,6 +36,7 @@ def signup_view(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            Profile.objects.create(user=form, name=form.cleaned_data.get('username'))
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
@@ -56,6 +58,6 @@ def home(request):
 
 @login_required(login_url='login')
 def profile(request):
-    profile = Profile.objects.get(user=request.user)
-    context = {'profile': profile}
+    user_profile = Profile.objects.get(user=request.user)
+    context = {'profile': user_profile}
     return render(request, 'core/profile.html', context)
