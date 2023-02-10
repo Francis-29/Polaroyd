@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-
+from .models import Profile
 
 # Create your views here.
 def landing_page(request):
@@ -56,4 +56,6 @@ def home(request):
 
 @login_required(login_url='login')
 def profile(request):
-    return render(request, 'core/profile.html')
+    profile = Profile.objects.get(user=request.user)
+    context = {'profile': profile}
+    return render(request, 'core/profile.html', context)

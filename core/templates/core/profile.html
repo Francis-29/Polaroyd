@@ -14,13 +14,13 @@
 
     </div>
     <div class="w-max mx-auto -mt-16">
-        <img src="{% static 'images/avatar.png' %}" alt="user-avatar" class="rounded-full w-32">
+        <img src="{{ profile.profile_picture.url }}" alt="user-avatar" class="rounded-full w-32">
     </div>
     <div class="text-center text-myWhite px-44 mb-16">
-        <h1 class="text-4xl font-semibold">Francis</h1>
-        <p class="mb-4 text-xs">@francisuser</p>
-        <p class="mb-2 font-light">Hi I'm a student who loves photography. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat, esse?</p>
-        <h2 class="mb-2 font-medium">12 followers · 8 following</h2>
+        <h1 class="text-4xl font-semibold">{{ request.user }}</h1>
+        <p class="mb-4 text-xs">@{{ request.user }}</p>
+        <p class="mb-2 font-light">{{ profile.bio }}</p>
+        <h2 class="mb-2 font-medium">{{ profile.followers_count }} followers · {{ profile.following_count }} following</h2>
         <button class="bg-myTeal py-2 px-4 rounded-full hover:bg-cyan-800">Follow</button>
     </div>
     <div class="flex items-center space-x-8 justify-center text-white mb-8">
