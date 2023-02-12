@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="col-span-3 px-20 py-8">
+  <div class="h-full bg-myGray rounded-xl p-8 text-myWhite">
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="h-max w-max p-4 mx-auto rounded-sm text-myBlack bg-myWhite shadow-lg shadow-gray-900 border my-6 break-inside-avoid-column">
+        <!-- Picture -->
+        <div class="my-2 flex justify-center">
+            <img src="{{ post.image.url }}" alt="post-picture" class="h-60">
+        </div>
+        <!-- Caption-->
+        <div class="flex items-center justify-center h-16">
+          <input type="text" name="caption" value="{{ post.caption }}" class="text-myGray px-2 py-1 border border-myBlack rounded-sm">
+        </div>
+        <div>
+        </div>
+    </div>
+      <div class="flex space-x-8 justify-end">
+        <a href="{% url 'home' %}" class="bg-slate-700 px-3 py-1 rounded-full hover:bg-slate-800">Cancel</a>
+        <input type="submit" value="Confirm" name="submit" class="bg-myTeal px-3 py-1 rounded-full cursor-pointer hover:bg-cyan-800">
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}

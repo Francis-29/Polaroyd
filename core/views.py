@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from .models import Profile, Post
 
 
@@ -46,10 +48,6 @@ def signup_view(request):
     return render(request, 'core/login.html')
 
 
-def check_username(request):
-    pass
-
-
 def logout_view(request):
     logout(request)
     return redirect('landing-page')
@@ -83,3 +81,27 @@ def add_photo(request):
         return redirect('home')
 
     return render(request, 'core/add-photo.html')
+
+
+@login_required(login_url='login')
+def edit_post(request, pk):
+    post = Post.objects.get(id=pk)
+    if request.method == 'POST':
+        caption = request.POST.get('caption')
+        post.caption = caption
+        post.save()
+        return redirect('home')
+
+    context = {'post': post}
+    return render(request, 'core/edit-post.html', context)
+
+
+@login_required(login_url='login')
+def delete_post(request, pk):
+    post = Post.objects.get(id=pk)
+    if request.method == 'POST':
+        post.delete()
+        return redirect('home')
+
+    context = {'post': post}
+    return render(request, 'core/delete-post.html', context)
