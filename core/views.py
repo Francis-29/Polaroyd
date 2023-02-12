@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .models import Profile
+from .models import Profile, Post
 
 
 # Create your views here.
@@ -25,7 +25,7 @@ def login_view(request):
             return redirect('home')
 
     context = {'page': page}
-    return render(request, 'login.html', context)
+    return render(request, 'core/login.html', context)
 
 
 def signup_view(request):
@@ -35,15 +35,19 @@ def signup_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            Profile.objects.create(user=form, name=form.cleaned_data.get('username'))
+            user_form = form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
+            Profile.objects.create(user=user_form, name=username)
             login(request, user)
             return redirect('home')
 
-    return render(request, 'login.html')
+    return render(request, 'core/login.html')
+
+
+def check_username(request):
+    pass
 
 
 def logout_view(request):
@@ -53,11 +57,29 @@ def logout_view(request):
 
 @login_required(login_url='login')
 def home(request):
-    return render(request, 'core/index.html')
+    posts = Post.objects.all().order_by('-date_added')
+    context = {'posts': posts}
+    return render(request, 'core/index.html', context)
 
 
 @login_required(login_url='login')
 def profile(request):
     user_profile = Profile.objects.get(user=request.user)
-    context = {'profile': user_profile}
+    posts = Post.objects.filter(author=request.user)
+    context = {'profile': user_profile, 'posts': posts}
     return render(request, 'core/profile.html', context)
+
+
+@login_required(login_url='login')
+def add_photo(request):
+    if request.method == 'POST' and request.FILES['image']:
+        image = request.FILES['image']
+        caption = request.POST['caption']
+        Post.objects.create(
+            author=request.user,
+            caption=caption,
+            image=image
+        )
+        return redirect('home')
+
+    return render(request, 'core/add-photo.html')

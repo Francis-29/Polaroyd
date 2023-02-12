@@ -1,12 +1,12 @@
 {% load static %}
 <div class="col-span-1 p-8 border-r border-gray-900">
-  <a href=""><img src="{% static 'images/mylogo.png' %}" alt="Logo" class="mx-auto w-48 px-4 py-2"></a>
-  <div class="text-myWhite flex space-x-4 mt-10 px-6 py-4 rounded-sm hover:cursor-pointer hover:bg-myTeal hover:shadow-lg transition-all ease-in-out duration-300 nav">
+  <a href="{% url 'home' %}"><img src="{% static 'images/mylogo.png' %}" alt="Logo" class="mx-auto w-48 px-4 py-2"></a>
+  <a href="{% url 'add-photo' %}" class="text-myWhite flex space-x-4 mt-10 px-6 py-4 rounded-sm hover:cursor-pointer hover:bg-myTeal hover:shadow-lg transition-all ease-in-out duration-300 nav">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
         </svg>
       <h4>Add Photo</h4>
-  </div>
+  </a>
   <div class="text-myWhite rounded-lg grid grid-cols-1 gap-y-4 py-2 mt-4">
       <a href="{% url 'home' %}" class="flex space-x-4 px-6 py-4 rounded-sm hover:bg-myTeal hover:shadow-lg transition-all ease-in-out duration-300 nav">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
