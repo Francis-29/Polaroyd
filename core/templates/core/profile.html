@@ -4,24 +4,33 @@
 <div class="col-span-3 overflow-auto scrollbar">
   <!-- Header -->
   <div class="flex items-center space-x-4 px-4 py-2 text-myWhite">
-      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+      <a href="{% url 'home' %}"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
         </svg>
       </a>
       <p class="text-xl font-medium">{{ profile.name }}</p>
   </div>
-  <div class="w-full h-1/3 bg-red-400">
-
+  <div class="w-full h-1/3 bg-myGray overflow-hidden">
+    {% if profile.bannerURL is None %}
+      <img src="{{ profile.bannerURL }}" alt="Banner Picture">
+    {% endif %}
   </div>
   <div class="w-max mx-auto -mt-16">
-      <img src="{{ profile.profile_picture.url }}" alt="user-avatar" class="rounded-full w-32">
+    <div class="w-32 overflow-hidden rounded-full">
+      <img src="{{ profile.imageURL }}" alt="user-avatar">
+    </div>
   </div>
   <div class="text-center text-myWhite px-44 mb-16">
       <h1 class="text-4xl font-semibold">{{ profile.name }}</h1>
       <p class="mb-4 text-xs">@{{ profile.user }}</p>
       <p class="mb-2 font-light">{{ profile.bio }}</p>
       <h2 class="mb-2 font-medium">{{ profile.followers_count }} followers · {{ profile.following_count }} following</h2>
+
+    {% if request.user == profile.user %}
+      <a href="{% url 'profile-edit' %}" class="border border-myTeal py-2 px-4 rounded-full hover:bg-cyan-800">Edit Profile</a>
+    {% else %}
       <button class="bg-myTeal py-2 px-4 rounded-full hover:bg-cyan-800">Follow</button>
+    {% endif %}
   </div>
   <div class="flex items-center space-x-8 justify-center text-white mb-8">
       <a href="#" class="text-lg font-semibold border-b-4 pb-1 border-myTeal">Created</a>

@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import get_user_model
 from .models import Profile, Post
 
 
@@ -69,6 +68,21 @@ def profile(request, pk):
     posts = Post.objects.filter(author=user_profile.user)
     context = {'profile': user_profile, 'posts': posts}
     return render(request, 'core/profile.html', context)
+
+
+@login_required(login_url='login')
+def profile_edit(request):
+    user_profile = Profile.objects.get(user=request.user)
+    if request.method == 'POST':
+        # user_profile.profile_picture = request.POST.get('profile_picture')
+        # user_profile.banner = request.POST.get('banner')
+        user_profile.name = request.POST.get('name')
+        user_profile.bio = request.POST.get('bio')
+        user_profile.save()
+        return redirect('profile', pk=request.user.id)
+
+    context = {'profile': user_profile}
+    return render(request, 'core/profile-edit.html', context)
 
 
 @login_required(login_url='login')

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="col-span-3 px-20 py-8">
+  <div class="h-full bg-myGray rounded-xl p-8 text-myWhite flex flex-col">
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="flex flex-col space-y-12 mb-20">
+<!--        <div class="flex space-x-2">-->
+<!--          <div>-->
+<!--            <label for="profile-picture" class="block">Profile Picture</label>-->
+<!--            <input type="file" name="profile_picture" id="profile-picture" value="{{ profile.imageURL }}">-->
+<!--          </div>-->
+<!--          <div>-->
+<!--            <img src="{{ profile.imageURL }}" alt="profile-picture" class="h-16">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="flex space-x-2">-->
+<!--          <div>-->
+<!--            <label for="banner" class="block">Banner</label>-->
+<!--            <input type="file" name="banner" id="banner" value="{{ profile.bannerURL }}">-->
+<!--          </div>-->
+<!--          <div>-->
+<!--            <img src="{{ profile.bannerURL }}" alt="profile-picture" class="h-16">-->
+<!--          </div>-->
+<!--        </div>-->
+        <div>
+          <label for="name" class="block">Username</label>
+          <input type="text" name="name" id="name" value="{{ profile.name }}" class="text-myBlack">
+        </div>
+        <div>
+          <label for="bio" class="block">Bio</label>
+          <input type="text" name="bio" id="bio" value="{{ profile.bio }}" class="text-myBlack">
+        </div>
+      </div>
+
+      <div class="flex space-x-8 justify-end">
+        <a href="{% url 'home' %}" class="bg-slate-700 px-3 py-1 rounded-full hover:bg-slate-800">Cancel</a>
+        <input type="submit" value="Confirm" name="submit" class="bg-red-600 px-3 py-1 rounded-full cursor-pointer hover:bg-red-700">
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}

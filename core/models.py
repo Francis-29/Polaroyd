@@ -15,6 +15,22 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+    @property
+    def imageURL(self):
+        try:
+            url = self.profile_picture.url
+        except:
+            url = ''
+        return url
+
+    @property
+    def bannerURL(self):
+        try:
+            url = self.banner.url
+        except:
+            url = ''
+        return url
+
 
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
