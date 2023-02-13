@@ -9,6 +9,9 @@ from .models import Profile, Post
 
 # Create your views here.
 def landing_page(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
     return render(request, 'landing-page.html')
 
 
@@ -61,9 +64,9 @@ def home(request):
 
 
 @login_required(login_url='login')
-def profile(request):
-    user_profile = Profile.objects.get(user=request.user)
-    posts = Post.objects.filter(author=request.user)
+def profile(request, pk):
+    user_profile = Profile.objects.get(user=pk)
+    posts = Post.objects.filter(author=user_profile.user)
     context = {'profile': user_profile, 'posts': posts}
     return render(request, 'core/profile.html', context)
 
