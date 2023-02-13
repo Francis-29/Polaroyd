@@ -1,16 +1,17 @@
 {% load static %}
 <div class="col-span-1 border-l border-gray-900 p-4">
-  <div class="w-fit mx-auto flex space-x-4 items-center mb-8 text-myWhite py-4 px-8 rounded-lg">
+  <div class="w-fit mx-auto flex space-x-2 items-center mb-8 text-myWhite py-4 px-8 rounded-lg">
       <a href="#"><img src="{% static 'images/avatar.png' %}" alt="Avatar" class="avatar w-12 rounded-full "></a>
       <div>
           <a href="#"><h3 class="text-s font-medium">{{ request.user }}</h3></a>
           <p class="text-xs">@{{ request.user }}</p>
       </div>
-      <a href="#">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-      </svg>
-      </a>
+<!--      <a href="#">-->
+<!--      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">-->
+<!--          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />-->
+<!--      </svg>-->
+<!--      </a>-->
+      <a href="{% url 'logout' %}" class="text-xs hover:text-myTeal">Logout</a>
   </div>
 
   <div class="text-myWhite rounded-md px-4 py-2 mt-8 border-gray-700 border">
