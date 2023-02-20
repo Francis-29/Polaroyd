@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .models import Profile, Post
+from .models import *
 
 
 # Create your views here.
@@ -122,3 +121,13 @@ def delete_post(request, pk):
 
     context = {'post': post}
     return render(request, 'core/delete-post.html', context)
+
+
+@login_required(login_url='login')
+def like(request, pk):
+    post = Post.objects.get(id=pk)
+    user_profile = Profile.objects.get(user=request.user)
+    new_like, created = Like.objects.get_or_create(profile=user_profile, post=post)
+    if not created:
+        new_like.delete()
+    return redirect('home')
